@@ -126,7 +126,7 @@ if __name__ == '__main__':
         for articleUrl in articleUrls:
             allArticleUrls.append(articleUrl)
 
-    # 安装文章发表时间创建issue，最早的文章先创建issue
+    # 按照文章发表时间创建issue，最早的文章先创建issue
     for articleUrl in reversed(allArticleUrls):
         articleId = extract_csdn_article_id(articleUrl)
         markdownArticle = get_csdn_markdown(articleId)
