@@ -5,11 +5,13 @@ export csdn blog and create github issue blog.
 `python csdn-export.py --help` for details.
 
 ## Premise
-1. pip install -r requirements.txt
+```
+pip install -r requirements.txt
+```
 
 ## Demo
-1. echo CSDN_COOKIE > cookie.txt
-2. python csdn-export.py -u GITHUB_USERNAME -r GITHUB_REPO -t GITHUB_ACCESS_TOKEN -p CSDN_BLOG_MAX_PAGE
+1. `echo CSDN_COOKIE > cookie.txt`  
+2. `python csdn-export.py -u GITHUB_USERNAME -r GITHUB_REPO -t GITHUB_ACCESS_TOKEN -p CSDN_BLOG_MAX_PAGE`
 
 ## Variables
 `GITHUB_ACCESS_TOKEN`: Generate under here, https://github.com/settings/tokens  
