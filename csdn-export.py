@@ -34,12 +34,11 @@ def make_sure_create_issue(title, body, token, username, repo, times=0):
     return created
 
 
-username = 'hanziyuan08'
 baseCsdn = 'https://blog.csdn.net/{username}//article/list/{page}'
 baseCsdnMarkdown = 'https://mp.csdn.net/mdeditor/getArticle?id={articleId}'
 
 
-def get_csdn_page():
+def get_csdn_page(username):
     url = baseCsdn.replace('{username}', username).replace('{page}', '1')
     print(requests.get(url).text)
     soup = BeautifulSoup(requests.get(url).text, 'html.parser')
@@ -48,7 +47,7 @@ def get_csdn_page():
     return list(map(lambda x: x.attrs['data-page'], page_htmls))[-1]
 
 
-def query_csdn_article_urls(page_num):
+def query_csdn_article_urls(page_num, username):
     url = baseCsdn.replace('{username}', username).replace('{page}', str(page_num))
     soup = BeautifulSoup(requests.get(url).text, 'html.parser')
     article_htmls = soup.select('h4 > a')
@@ -116,13 +115,14 @@ if __name__ == '__main__':
     parser.add_argument('-t', '--token', help="github personal access token")
     parser.add_argument('-p', '--page', type=int, help="csdn blog max page")
     parser.add_argument('-u', '--username', help="github account username")
+    parser.add_argument('-c', '--csdnusername', help="csdn account username")
     parser.add_argument('-r', '--repo', help="github account repo")
     args = parser.parse_args()
 
     allArticleUrls = []
     # 取出所有问文章
     for page in range(1, args.page + 1):
-        articleUrls = query_csdn_article_urls(page)
+        articleUrls = query_csdn_article_urls(page, args.csdnusername)
         for articleUrl in articleUrls:
             allArticleUrls.append(articleUrl)
 
